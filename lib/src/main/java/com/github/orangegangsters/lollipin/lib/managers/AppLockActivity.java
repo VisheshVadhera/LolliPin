@@ -17,6 +17,7 @@ import com.github.orangegangsters.lollipin.lib.PinActivity;
 import com.github.orangegangsters.lollipin.lib.R;
 import com.github.orangegangsters.lollipin.lib.enums.KeyboardButtonEnum;
 import com.github.orangegangsters.lollipin.lib.interfaces.KeyboardButtonClickedListener;
+import com.github.orangegangsters.lollipin.lib.interfaces.KeyboardButtonRoleInterface;
 import com.github.orangegangsters.lollipin.lib.views.KeyboardView;
 import com.github.orangegangsters.lollipin.lib.views.PinCodeRoundView;
 
@@ -29,7 +30,12 @@ import java.util.List;
  * Call this activity in normal or singleTop mode (not singleTask or singleInstance, it does not work
  * with {@link android.app.Activity#startActivityForResult(android.content.Intent, int)}).
  */
-public abstract class AppLockActivity extends PinActivity implements KeyboardButtonClickedListener, View.OnClickListener, FingerprintUiHelper.Callback {
+public abstract class AppLockActivity
+        extends PinActivity
+        implements KeyboardButtonClickedListener,
+                   View.OnClickListener,
+                   FingerprintUiHelper.Callback,
+                   KeyboardButtonRoleInterface{
 
     public static final String TAG = AppLockActivity.class.getSimpleName();
     public static final String ACTION_CANCEL = TAG + ".actionCancelled";
@@ -136,6 +142,8 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
     public int getKeyboardView() {
         return R.id.pin_code_keyboard_view;
     }
+
+    public abstract void setKeyboardButtonRole(KeyboardButtonEnum keyboardButtonEnum);
 
     /**
      * Init {@link FingerprintManager} of the {@link android.os.Build.VERSION#SDK_INT} is > to Marshmallow
