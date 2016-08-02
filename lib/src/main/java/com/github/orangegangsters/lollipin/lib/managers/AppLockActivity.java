@@ -118,7 +118,7 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
         mPinCodeRoundView.setPinLength(this.getPinLength());
         mForgotTextView = (TextView) this.findViewById(R.id.pin_code_forgot_textview);
         mForgotTextView.setOnClickListener(this);
-        mKeyboardView = (KeyboardView) this.findViewById(R.id.pin_code_keyboard_view);
+        mKeyboardView = (KeyboardView) this.findViewById(getKeyboardView());
         mKeyboardView.setKeyboardButtonClickedListener(this);
 
         int logoId = mLockManager.getAppLock().getLogoId();
@@ -131,6 +131,10 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
         mForgotTextView.setVisibility(mLockManager.getAppLock().shouldShowForgot() ? View.VISIBLE : View.GONE);
 
         setStepText();
+    }
+
+    public int getKeyboardView() {
+        return R.id.pin_code_keyboard_view;
     }
 
     /**
